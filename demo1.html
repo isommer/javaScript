@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+<script>
+	var proviArr = ["浙江省", "江苏省", "湖北省", "河北省", "辽宁省"];
+	var cityArr0 = ["杭州市", "宁波市", "温州市", "嘉兴市", "绍兴市", "金华市"];
+	var cityArr1 = ["南京市", "苏州市", "常州市", "扬州市", "无锡市"];
+	var cityArr2 = ["武汉市", "黄石市", "黄冈市", "襄阳市", "咸宁市"];
+	var cityArr3 = ["石家庄", "唐山市", "保定市", "廊坊市"];
+	var cityArr4 = ["长春市", "四平市", "延边市"];
+	var city = [cityArr0, cityArr1, cityArr2, cityArr3, cityArr4];
+
+function chooseProvi() {
+	//1.通过id获取父节点(select)对象
+	var parent = document.getElementById("province");
+	//2.遍历数组给父节点添加元素
+	for(var i = 0; i < proviArr.length; i++) {
+		//创建一个元素名为option的元素
+		var opt = document.createElement("option");
+		opt.value = i;
+		//添加到父节点
+		opt.innerHTML = proviArr[i];
+		parent.appendChild(opt);
+	}
+}
+//根据省获取市
+function chooseCity() {
+	//先获取省元素对象
+	var provi = document.getElementById("province");
+	//获取省的值
+	var i = provi.value;
+	//获取该省的全部城市的数组
+	var arr = city[i];
+	//获取市元素对象
+	var cityElement = document.getElementById("city");
+	//清除元素
+	cityElement.innerHTML = "";
+	if(i != -1) {
+		for(var j = 0; j < arr.length; j++) {
+			//创建城市元素选项
+			var opt = document.createElement("option");
+			opt.value = j;
+			opt.innerHTML = arr[j];
+			cityElement.appendChild(opt);
+		}
+	} else {
+		//如果是-1 恢复为默认--请选择--
+		var opt = document.createElement("option");
+		opt.value = -1;
+		opt.innerHTML = "--请选择--";
+		cityElement.appendChild(opt);
+	}
+
+}</script>
+	</head>
+
+	<body>
+  <!-- onchange 联动出发-->
+		<select id="province" name="province" onchange="chooseCity()">
+			<!-- 默认为 --请选择-- value-1 -->
+			<option selected="selected" value="-1">--请选择--</option>
+			<!-- 这段脚本用于添加省的元素选项-->
+			<script>chooseProvi()</script>;
+		</select>
+		<select id="city" name="city">
+			<option value="-1" selected="selected">--请选择--</option>
+		</select>
+	</body>
+</html>
