@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+
+		<title>全屏轮播</title>
+
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<script src="js/jquery-1.11.3.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script>
+			var i = 1;
+			window.onload = function() {
+				setTimeout("changeImg()", 2000);
+				//setInterval("changeImg()",2000);
+        //循环定时器的两种使用方式; 一种是setInterval 一种是在setTimeout 所调用的函数里调用函数自身
+			}
+
+			function changeImg() {
+				var arr = ["039.jpg", "040.jpg", "041.jpg", "043.jpg"];
+				var plaEle = document.getElementById("placard");
+				plaEle.src = arr[i];
+				i++;
+				if(i == 4) {
+					i = 0;
+				}
+				setTimeout("changeImg()", 2000);
+			}
+		</script>
+
+	</head>
+
+	<body>
+		<div>
+			<img src="039.jpg" width="100%" id="placard" />
+		</div>
+
+	</body>
+
+</html>
